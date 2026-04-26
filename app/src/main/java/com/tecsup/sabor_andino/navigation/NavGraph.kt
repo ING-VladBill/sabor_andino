@@ -10,9 +10,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.tecsup.sabor_andino.screens.DetalleScreen
 import com.tecsup.sabor_andino.screens.HomeScreen
 import com.tecsup.sabor_andino.screens.LoginScreen
 import com.tecsup.sabor_andino.screens.MenuScreen
+import com.tecsup.sabor_andino.screens.PerfilScreen
 import com.tecsup.sabor_andino.viewmodel.PedidoViewModel
 
 object Rutas {
@@ -74,12 +76,26 @@ fun NavGraph(
             arguments = listOf(navArgument("platoId") { type = NavType.IntType })
         ) { backStackEntry ->
             val platoId = backStackEntry.arguments?.getInt("platoId") ?: 0
-            Text("Detalle del plato #$platoId — en construcción 🚧")
+            DetalleScreen(
+                platoId = platoId,
+                pedidoViewModel = viewModel,
+                onAtras = {
+                    navController.popBackStack()
+                },
+                onIrPerfil = {
+                    navController.navigate(Rutas.PERFIL)
+                }
+            )
         }
 
         // ⚠️ STUB — tu compañero reemplaza el Text() por PerfilScreen(...)
         composable(Rutas.PERFIL) {
-            Text("Perfil / Mi Pedido — en construcción 🚧")
+            PerfilScreen(
+                pedidoViewModel = viewModel,
+                onAtras = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
