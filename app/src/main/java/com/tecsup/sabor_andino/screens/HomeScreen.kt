@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 fun HomeScreen(
     correo: String,
     onVerMenu: () -> Unit,
+    onVerPedido: () -> Unit,
     onVerPerfil: () -> Unit
 ) {
     val nombre = correo.substringBefore("@")
@@ -26,7 +27,7 @@ fun HomeScreen(
         }
         Spacer(modifier = Modifier.height(8.dp))
 
-        Button(onClick = onVerPerfil, modifier = Modifier.fillMaxWidth()) {
+        Button(onClick = onVerPedido, modifier = Modifier.fillMaxWidth()) {
             Text("Mi Pedido")
         }
         Spacer(modifier = Modifier.height(8.dp))

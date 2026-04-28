@@ -48,7 +48,7 @@ com.tecsup.sabor_andino/
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/tu-usuario/sabor-andino.git
+   git clone https://github.com/ING-VladBill/sabor_andino
    ```
 2. **Abrir en Android Studio:**
    Asegúrate de tener la última versión estable de Android Studio (Iguana o superior).
@@ -61,7 +61,7 @@ com.tecsup.sabor_andino/
 Actualmente el proyecto se encuentra en desarrollo. 
 - [x] Estructura base y navegación.
 - [x] Pantallas de Login y Menú.
-- [ ] Detalle de plato completo.
+- [X] Detalle de plato completo.
 - [ ] Integración con base de datos real.
 
 ---

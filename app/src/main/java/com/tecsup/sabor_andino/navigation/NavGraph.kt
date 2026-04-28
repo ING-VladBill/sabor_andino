@@ -2,7 +2,6 @@ package com.tecsup.sabor_andino.navigation
 
 
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -10,16 +9,20 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.tecsup.sabor_andino.screens.DetalleScreen
 import com.tecsup.sabor_andino.screens.HomeScreen
 import com.tecsup.sabor_andino.screens.LoginScreen
 import com.tecsup.sabor_andino.screens.MenuScreen
+import com.tecsup.sabor_andino.screens.PedidoScreen
+import com.tecsup.sabor_andino.screens.PerfilScreen
 import com.tecsup.sabor_andino.viewmodel.PedidoViewModel
 
 object Rutas {
-    const val LOGIN  = "login"
-    const val HOME   = "home/{correo}"
-    const val MENU   = "menu"
+    const val LOGIN   = "login"
+    const val HOME    = "home/{correo}"
+    const val MENU    = "menu"
     const val DETALLE = "detalle/{platoId}"
+    const val PEDIDO  = "pedido"
     const val PERFIL  = "perfil"
 
     fun homeConCorreo(correo: String) = "home/$correo"
@@ -55,6 +58,7 @@ fun NavGraph(
             HomeScreen(
                 correo = correo,
                 onVerMenu   = { navController.navigate(Rutas.MENU) },
+                onVerPedido = { navController.navigate(Rutas.PEDIDO) },
                 onVerPerfil = { navController.navigate(Rutas.PERFIL) }
             )
         }
@@ -66,20 +70,30 @@ fun NavGraph(
             )
         }
 
-
-
-        // ⚠️ STUB — tu compañero reemplaza el Text() por DetalleScreen(...)
         composable(
             route = Rutas.DETALLE,
             arguments = listOf(navArgument("platoId") { type = NavType.IntType })
         ) { backStackEntry ->
             val platoId = backStackEntry.arguments?.getInt("platoId") ?: 0
-            Text("Detalle del plato #$platoId — en construcción 🚧")
+            DetalleScreen(
+                platoId         = platoId,
+                pedidoViewModel = viewModel,
+                onAtras = { navController.popBackStack() },
+                onIrPerfil = { navController.navigate(Rutas.PEDIDO) }
+            )
         }
 
-        // ⚠️ STUB — tu compañero reemplaza el Text() por PerfilScreen(...)
+        composable(Rutas.PEDIDO) {
+            PedidoScreen(
+                pedidoViewModel = viewModel,
+                onAtras         = { navController.popBackStack() }
+            )
+        }
+
         composable(Rutas.PERFIL) {
-            Text("Perfil / Mi Pedido — en construcción 🚧")
+            PerfilScreen(
+                onAtras = { navController.popBackStack() }
+            )
         }
     }
 }
