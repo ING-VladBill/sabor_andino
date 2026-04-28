@@ -61,7 +61,7 @@ com.tecsup.sabor_andino/
 Actualmente el proyecto se encuentra en desarrollo. 
 - [x] Estructura base y navegación.
 - [x] Pantallas de Login y Menú.
-- [ ] Detalle de plato completo.
+- [X] Detalle de plato completo.
 - [ ] Integración con base de datos real.
 
 ---
