@@ -85,7 +85,8 @@ fun NavGraph(
                 cantidadEnPedido = pedidos.size,
                 totalPedido      = totalPedido,
                 // Lambda: cuántos de cada plato hay en el carrito (para el badge por ítem)
-                cantidadDeItem   = { platoId -> viewModel.cantidadDeItem(platoId) }
+                cantidadDeItem   = { platoId -> viewModel.cantidadDeItem(platoId) },
+                onAgregarAlCarrito = { plato -> viewModel.agregarAlPedido(plato, 1, "") }
             )
         }
 
@@ -113,7 +114,8 @@ fun NavGraph(
             PedidoScreen(
                 pedidoViewModel = viewModel,
                 onAtras         = { navController.popBackStack() },
-                onIrACheckout   = { navController.navigate(Rutas.CHECKOUT) }
+                onIrACheckout   = { navController.navigate(Rutas.CHECKOUT) },
+                onVerMenu       = { navController.navigate(Rutas.MENU) }
             )
         }
 
@@ -153,7 +155,13 @@ fun NavGraph(
         composable(Rutas.PERFIL) {
             PerfilScreen(
                 pedidoViewModel = viewModel,
-                onAtras         = { navController.popBackStack() }
+                onAtras         = { navController.popBackStack() },
+                onCerrarSesion  = {
+                    viewModel.cerrarSesion()
+                    navController.navigate(Rutas.LOGIN) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
             )
         }
     }

@@ -5,11 +5,21 @@ import com.tecsup.sabor_andino.data.Plato
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.text.SimpleDateFormat
+import java.util.*
 
 data class ItemPedido(
     val plato: Plato,
     val cantidad: Int,
     val nota: String = ""      // "sin cebolla", "término 3/4", etc.
+)
+
+data class PedidoCompletado(
+    val id: String,
+    val items: List<ItemPedido>,
+    val total: Double,
+    val fecha: String,
+    val tipoEntrega: String
 )
 
 class PedidoViewModel : ViewModel() {
@@ -29,6 +39,9 @@ class PedidoViewModel : ViewModel() {
 
     private val _numeroMesa = MutableStateFlow("")
     val numeroMesa: StateFlow<String> = _numeroMesa.asStateFlow()
+
+    private val _historialPedidos = MutableStateFlow<List<PedidoCompletado>>(emptyList())
+    val historialPedidos: StateFlow<List<PedidoCompletado>> = _historialPedidos.asStateFlow()
 
     fun setCorreo(correo: String) { _correo.value = correo }
 
@@ -71,9 +84,34 @@ class PedidoViewModel : ViewModel() {
 
     // Se llama desde Checkout al confirmar
     fun confirmarPedido(tipo: String, mesa: String) {
+        val numPedido = "#${(1000..9999).random()}"
+        val total = calcularTotal()
+        val fechaActual = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(Date())
+        val entregaDesc = if (tipo == "mesa") "Mesa $mesa" else "Para llevar"
+
+        val pedidoCompletado = PedidoCompletado(
+            id = numPedido,
+            items = _pedido.value.toList(),
+            total = total,
+            fecha = fechaActual,
+            tipoEntrega = entregaDesc
+        )
+
+        // Guardar en historial antes de limpiar
+        _historialPedidos.value = listOf(pedidoCompletado) + _historialPedidos.value
+
         _tipoEntrega.value = tipo
         _numeroMesa.value  = mesa
-        _numeroPedido.value = "#${(1000..9999).random()}"
+        _numeroPedido.value = numPedido
         _pedido.value = emptyList()
+    }
+
+    fun cerrarSesion() {
+        _correo.value = ""
+        _pedido.value = emptyList()
+        _historialPedidos.value = emptyList()
+        _numeroPedido.value = ""
+        _tipoEntrega.value = ""
+        _numeroMesa.value = ""
     }
 }
