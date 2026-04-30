@@ -86,7 +86,7 @@ fun NavGraph(
         composable(Rutas.PEDIDO) {
             PedidoScreen(
                 pedidoViewModel = viewModel,
-                onAtras         = { navController.popBackStack() }
+                onAtras         = { navController.popBackStack(Rutas.MENU, false) }
             )
         }
 
