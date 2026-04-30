@@ -9,14 +9,6 @@
 
 ---
 
-## 📸 Screenshots (Próximamente)
-
-| Login | Menú Principal | Detalle de Plato | Carrito / Pedido |
-|-------|----------------|------------------|------------------|
-| ![Login](https://via.placeholder.com/200x400?text=Login+Screen) | ![Home](https://via.placeholder.com/200x400?text=Home+Screen) | ![Detail](https://via.placeholder.com/200x400?text=Detail+Screen) | ![Cart](https://via.placeholder.com/200x400?text=Cart+Screen) |
-
----
-
 ## ✨ Características Actuales
 
 - 🔐 **Autenticación Dinámica:** Flujo de login que personaliza la experiencia del usuario con su correo.
