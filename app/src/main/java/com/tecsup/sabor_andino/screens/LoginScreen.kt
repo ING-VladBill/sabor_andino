@@ -129,16 +129,6 @@ fun LoginScreen(onLoginExitoso: (String) -> Unit) {
             )
             Spacer(Modifier.height(6.dp))
 
-            // ¿Olvidaste contraseña?
-            Text(
-                "¿Olvidaste tu contraseña?",
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.End,
-                color = Color(0xFF8B4513),
-                fontSize = 13.sp
-            )
-            Spacer(Modifier.height(16.dp))
-
             // Mensaje error
             AnimatedVisibility(visible = error.isNotEmpty()) {
                 Text(
@@ -171,61 +161,6 @@ fun LoginScreen(onLoginExitoso: (String) -> Unit) {
                     fontWeight = FontWeight.Bold
                 )
             }
-            Spacer(Modifier.height(20.dp))
-
-            // Separador "o continúa con"
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                HorizontalDivider(modifier = Modifier.weight(1f))
-                Text(
-                    "  o continúa con  ",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                HorizontalDivider(modifier = Modifier.weight(1f))
-            }
-            Spacer(Modifier.height(12.dp))
-
-            // Botones sociales
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                OutlinedButton(
-                    onClick = {},
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(44.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(containerColor = Color.White.copy(alpha = 0.8f))
-                ) {
-                    Text("G  Google")
-                }
-                OutlinedButton(
-                    onClick = {},
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(44.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(containerColor = Color.White.copy(alpha = 0.8f))
-                ) {
-                    Text("f  Facebook")
-                }
-            }
-            Spacer(Modifier.height(16.dp))
-
-            // Registro
-            Row(horizontalArrangement = Arrangement.Center) {
-                Text("¿No tienes cuenta? ")
-                Text(
-                    "Regístrate",
-                    color = Color(0xFF8B4513),
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.clickable {}
-                )
-            }
-
-            // Espacio inferior
-            Spacer(Modifier.height(100.dp))
         }
     }
 }

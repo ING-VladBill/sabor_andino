@@ -7,5 +7,6 @@ data class Plato(
     val descripcionCompleta: String,
     val precio: Double,
     val categoria: String,
-    val emoji: String
+    val emoji: String,
+    val imagenRes: Int
 )

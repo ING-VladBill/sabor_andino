@@ -38,7 +38,8 @@ fun PedidoScreen(
     val itemsPedido by pedidoViewModel.pedido.collectAsState()
     val totalPedido = itemsPedido.sumOf { it.plato.precio * it.cantidad }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier.fillMaxSize()) {
 
         // CAPA 1 — Fondo:
         Image(
@@ -204,7 +205,7 @@ fun PedidoScreen(
                                 .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // — Emoji del plato:
+                            // — Imagen del plato:
                             Box(
                                 Modifier
                                     .size(56.dp)
@@ -212,7 +213,12 @@ fun PedidoScreen(
                                     .background(Color(0xFFF5EDE3)),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(item.plato.emoji, fontSize = 28.sp)
+                                Image(
+                                    painter = painterResource(item.plato.imagenRes),
+                                    contentDescription = item.plato.nombre,
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Crop
+                                )
                             }
 
                             // — Nombre, nota y controles:
